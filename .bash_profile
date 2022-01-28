@@ -26,10 +26,6 @@ source $HOME/$directory/.git-completition.bash
 
 source $HOME/$directory/.git-alias.sh
 
-# node config
-
-source $HOME/$directory/.npmrc
-
 function parse_git_dirty {
   git diff --quiet HEAD &>/dev/null
   if [ $? != 1 ]

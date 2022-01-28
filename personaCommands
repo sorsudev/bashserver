@@ -1,15 +1,5 @@
 #!/bin/bash
 
-pdfGrayscale(){
-  gs \
-   -sDEVICE=pdfwrite \
-   -sProcessColorModel=DeviceGray \
-   -sColorConversionStrategy=Gray \
-   -dOverrideICC \
-   -o "$2" \
-   -f "$1"
-}
-
 spaceAnalize(){
   sudo du -cksh * | sort -h
 }
@@ -18,20 +8,12 @@ ecmd() {
     vim $HOME/.bashfiles/personaCommands
 }
 
+runDockerApp(){
+  APP_NAME=$(basename $PWD)
+  docker-compose up -d
+  docker attach "${APP_NAME}-app-1"
+}
+
 reload(){
     source $HOME/.bashrc
-}
-
-compileGcloudImage(){
-  tagName=gcr.io/${PROJECTID}/$(basename `pwd`)
-  docker tag $(basename `pwd`) $tagName
-  docker push $tagName
-}
-
-deployProduction(){
-  gcloud app deploy app_production.yaml
-}
-
-runPsql(){
-  psql -U postgres
 }
